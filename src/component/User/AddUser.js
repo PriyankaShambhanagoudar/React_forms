@@ -4,8 +4,6 @@ import Button from "../UI/Button";
 import Card from "../UI/Card";
 import classes from "./AddUser.module.css";
 
-
-
 const AddUser = (props) => {
   const [enteredUsername, setEnteredUsername] = useState("");
   const [enteredAge, setEnteredAge] = useState("");
@@ -13,16 +11,19 @@ const AddUser = (props) => {
   const addUserHandler = (event) => {
     event.preventDefault();
     /* trim will remove white space */
-    if(enteredUsername.trim().length === 0 || enteredAge.trim().length === 0 ){
-        return;
+    if (enteredUsername.trim().length === 0 || enteredAge.trim().length === 0) {
+      return;
     }
-    if(+enteredAge < 1 ){
-        return;
+    if (+enteredAge < 1) {
+      return;
     }
-    console.log(enteredUsername, enteredAge);
+   
+    props.onAdduser(enteredUsername, enteredAge);
     setEnteredUsername("");
     setEnteredAge("");
   };
+
+
   const usernameChangeHandler = (event) => {
     setEnteredUsername(event.target.value);
   };
@@ -48,11 +49,9 @@ const AddUser = (props) => {
           value={enteredAge}
           onChange={ageChangeHandler}
         />
-        <Button type="submit">Add User</Button>  
+        <Button type="submit">Add User</Button>
       </form>
-      
     </Card>
   );
 };
 export default AddUser;
-       
